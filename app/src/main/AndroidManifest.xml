@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mainapp.furvent.mainapp">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".application.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,6 +22,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".broadcast.LanguageBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcast.NotificationScheduledBroadcast" />
+
+        <activity android:name=".ServiceExempleActivity" />
+
+        <service
+            android:name=".service.GPSCoordinateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".NotificationActivity" />
+
+        <receiver
+            android:name=".broadcast.OnMobileStartNotificationBroadcast"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.NotificationOnMobileStartService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".TPElevesListActivity" />
+        <activity android:name=".WebExempleActivity" />
+        <activity android:name=".TPWebServiceActivity"></activity>
     </application>
 
 </manifest>
